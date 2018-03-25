@@ -1,0 +1,158 @@
+html,
+body
+{
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.img-circle
+{
+    border-radius: 50%;
+}
+
+.headshot
+{
+    width: 115px;
+    height: 115px;
+}
+
+.brand
+{
+    font-size: 2.6em;
+
+    margin-bottom: 0;
+}
+
+.text-center
+{
+    text-align: center;
+}
+
+.text-right
+{
+    text-align: right;
+}
+
+.meta
+{
+    font-size: .8rem !important;
+    font-weight: 300;
+}
+
+pre
+{
+    padding: 1px;
+
+    tab-size: 2;
+}
+
+
+.hljs {
+    white-space: pre;
+
+    overflow-x: auto; /* no line wrapping */
+}
+
+pre,
+code
+{
+    font-family: monospace;
+    border-radius: 4px;
+    width: 100%;
+    font-size: .85em;
+}
+
+code {
+	padding:.15em .3em;
+	background: #272932!important;
+	color: #ececec!important;
+	box-sizing: border-box;
+	margin: 0 .25em;
+}
+
+
+.copyright,
+.poweredby
+{
+    font-size: 13px !important;
+    font-weight: 300;
+}
+
+img.center
+{
+    display: block;
+
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 48em) {
+    .index {
+        padding-top: 6rem;
+    }
+}
+
+@media (min-width: 48em) {
+    .post {
+        padding-top: 5.5rem;
+    }
+}
+
+@media (min-width: 48em) {
+    .sidebar {
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 48em) {
+    .sidebar .container {
+        padding-top: 7rem;
+    }
+}
+
+.external-links ul {
+    list-style: none;
+}
+
+.external-links li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar .lead {
+    font-size: 0.8rem;
+}
+
+.content .section-title {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.content .item-link {
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+}
+
+.content .item-link h2 {
+    margin-top: 0;
+    margin-bottom: 0.1rem;
+    font-size: 1.2rem;
+}
+
+.content ul.section-items {
+    list-style: none;
+    padding-left: 0;
+}
+
+.content .section {
+    margin-top: 3rem;
+}
+
+.content .section:first-child {
+    margin-top: 0;
+}
+
+.content .post h1 {
+    margin-top: 0;
+}

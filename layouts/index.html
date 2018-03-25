@@ -1,0 +1,31 @@
+{{ define "header" -}}
+  {{ partial "header.html" . }}
+{{- end }}
+
+{{ define "content" -}}
+<div class="index">
+  {{ if where .Data.Pages.ByDate "Type" "posts" }}
+  <div class="section articles">
+    <h1 class="section-title">Articles</h1>
+    <ul class="section-items">
+      {{ range where .Data.Pages.ByDate "Type" "posts" }}
+        <li class="item-link"><h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2></li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  <div class="section projects">
+    <h1 class="section-title">Projects</h1>
+    <ul class="section-items">
+      <li class="item-link">
+        <h2><a href="https://bitbucket.org/samuel.lai/stackdump/">Stackdump</a></h2>
+        Offline StackOverflow and Stack Exchange site browser
+      </li>
+    </ul>
+  </div>
+</div>
+{{- end }}
+
+{{ define "footer" -}}
+{{- end }}

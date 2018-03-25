@@ -1,0 +1,37 @@
+<div class="sidebar">
+	<div class="container text-right">
+		<div class="sidebar-about">
+			<a href="{{ .Site.BaseURL }}">
+				<h1 class="brand">Samuel<br />Lai</h1>
+			</a>
+			{{ with .Site.Params.authorimage }} <img src="{{.}}" alt="Author Image" class="img-circle headshot center"> {{ end }}
+			<p class="lead">
+				Software engineer, working in <strong>Python</strong>, <strong>Golang</strong> and <strong>C#</strong>.
+				Infrastructure nerd deploying to <strong>Linux</strong> with <strong>AWS</strong> and <strong>Docker</strong>.
+				Interested in building things, automating processes and improving developer tooling and efficiency.
+			</p>
+		</div>
+		{{ partial "sidebar_menu.html" . }}
+        <div class="external-links">
+			<ul>
+				<li>
+					<a href="https://github.com/slai"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+					<a href="https://github.com/slai">GitHub</a>
+				</li>
+				<li>
+					<a href="https://bitbucket.org/samuel.lai"><i class="fab fa-bitbucket fa-lg" aria-hidden="true"></i></a>
+					<a href="https://bitbucket.org/samuel.lai">Bitbucket</a>
+				</li>
+				<li>
+					<a href="https://stackoverflow.com/users/150999"><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a>
+					<a href="https://stackoverflow.com/users/150999">StackOverflow</a>
+				</li>
+			</ul>
+        </div>
+		<p class="copyright">
+			Built with <a href="https://gohugo.io/">Hugo</a> &amp;
+			<a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>
+			(<a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>)
+        </p>
+	</div>
+</div>

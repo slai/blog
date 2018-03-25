@@ -1,0 +1,11 @@
+theme: hyde-hyde
+
+baseURL: https://slai.github.io/
+title: Samuel Lai
+disableKinds: ['RSS', 'taxonomy']
+params:
+  themeColor: "theme-base-0c"
+  dateformat: '2 January 2006'
+taxonomies:
+  tag: ''
+  category: ''
