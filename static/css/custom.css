@@ -122,6 +122,7 @@ img.center
 
 .sidebar .lead {
     font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .content .section-title {
