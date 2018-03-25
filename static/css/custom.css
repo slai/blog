@@ -72,6 +72,12 @@ code {
 	margin: 0 .25em;
 }
 
+.highlight pre {
+    word-wrap: normal;
+    overflow-x: auto;
+    white-space: pre;
+}
+
 
 .copyright,
 .poweredby
