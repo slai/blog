@@ -131,6 +131,10 @@ img.center
     color: rgba(255, 255, 255, 0.8);
 }
 
+.post > div.meta {
+    padding-top: 0.5rem;
+}
+
 .content .section-title {
     margin-top: 0;
     font-size: 1.5rem;

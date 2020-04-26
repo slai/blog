@@ -1,7 +1,7 @@
 <div class="post">
   <h1>{{ .Title }}</h1>
   {{ if ne .Params.showpagemeta false }}
-  <div class="col-sm-12 col-md-12">
+  <div class="col-sm-12 col-md-12 meta">
     <span class="text-left post-date meta">
       <!-- last modified date -->
       {{ if not .Lastmod.IsZero }}Last updated on {{ .Lastmod.Format .Site.Params.dateformat }} {{end}}
