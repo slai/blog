@@ -20,3 +20,5 @@ git add .
 git commit
 git push origin master
 ```
+
+Don't forget to commit the data changes in this repository.
