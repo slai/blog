@@ -1,10 +1,14 @@
 # Data for slai.github.io
 
+The files here are used to publish into the `public` git submodule, which is the repository _slai.github.io_ is served out of.
+
 ## Development
 
 1. Download and extract https://github.com/gohugoio/hugo/releases into `hugo/`
 
-2. `hugo/hugo server`
+2. `git submodule update --init --recursive` to download the theme and publish repositories
+
+3. `hugo/hugo server`
 
 ## Publish
 
