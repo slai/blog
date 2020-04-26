@@ -4,7 +4,7 @@ The files here are used to publish into the `public` git submodule, which is the
 
 ## Development
 
-1. Download and extract https://github.com/gohugoio/hugo/releases into `hugo/`
+1. Download and extract [Hugo v0.69.2](https://github.com/gohugoio/hugo/releases/tag/v0.69.2) into `hugo/`. Newer versions may work, or may be incompatible with the theme
 
 2. `git submodule update --init --recursive` to download the theme and publish repositories
 

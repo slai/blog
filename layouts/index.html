@@ -4,11 +4,11 @@
 
 {{ define "content" -}}
 <div class="index">
-  {{ if where .Data.Pages.ByDate "Type" "posts" }}
+  {{ if where .Site.RegularPages.ByDate "Section" "posts" }}
   <div class="section articles">
     <h1 class="section-title">Articles</h1>
     <ul class="section-items">
-      {{ range where .Data.Pages.ByDate "Type" "posts" }}
+      {{ range where .Site.RegularPages.ByDate "Section" "posts" }}
         <li class="item-link"><h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2></li>
       {{- end }}
     </ul>
