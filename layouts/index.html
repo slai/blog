@@ -1,30 +1,27 @@
+{{/*
+
+To modify homepage content, look in partials/homepage.html.
+
+This HUGE hack exists (partial homepage.html with a dirty if hack in _default/list.html) exists because for some reason,
+hugo is refusing to render index.html here in layouts, _and_ theme/hyde-hyde/layouts/index.html consistently.
+
+When running `hugo/hugo serve` index.html in layouts is correctly rendered, as expected. But when running `hugo/hugo`,
+index.html in layouts is completely ignored, theme/hyde-hyde/layouts/index.html is also ignored, and the homepage only
+renders _default/list.html.
+
+Hence there is a hack in _default/list.html to check if we're rendering the homepage, and if so, render the
+homepage.html partial instead of list_content.html.
+
+I lost hours to this, who knows why. Maybe a version after v0.69.2 will fix this.
+
+*/}}
+
 {{ define "header" -}}
-  {{ partial "header.html" . }}
-{{- end }}
+{{ partial "header.html" . }}
+{{- end -}}
 
 {{ define "content" -}}
-<div class="index">
-  {{ if where .Site.RegularPages.ByDate "Section" "posts" }}
-  <div class="section articles">
-    <h1 class="section-title">Articles</h1>
-    <ul class="section-items">
-      {{ range where .Site.RegularPages.ByDate "Section" "posts" }}
-        <li class="item-link"><h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2></li>
-      {{- end }}
-    </ul>
-  </div>
-  {{- end }}
-
-  <div class="section projects">
-    <h1 class="section-title">Projects</h1>
-    <ul class="section-items">
-      <li class="item-link">
-        <h2><a href="https://bitbucket.org/samuel.lai/stackdump/">Stackdump</a></h2>
-        Offline StackOverflow and Stack Exchange site browser
-      </li>
-    </ul>
-  </div>
-</div>
+{{ partial "homepage.html" . }}
 {{- end }}
 
 {{ define "footer" -}}

@@ -1,0 +1,14 @@
+{{ define "header" -}}
+    {{ partial "header.html" . }}
+{{- end -}}
+
+{{ define "content" -}}
+    {{ if eq $.Page.Permalink (print $.Site.BaseURL "index.html") }}
+    {{ partial "homepage.html" . }}
+    {{ else }}
+    {{ partial "list_content.html" . }}
+    {{ end }}
+{{- end -}}
+
+{{ define "footer" -}}
+{{- end }}
