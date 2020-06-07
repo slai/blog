@@ -1,5 +1,5 @@
 ---
-title: "Customizing Ubuntu live ISOs with Docker"
+title: "Customising Ubuntu live ISOs with Docker"
 lastmod: "2020-06-07"
 date: "2020-06-07"
 ---
