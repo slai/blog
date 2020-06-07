@@ -12,13 +12,6 @@ The files here are used to publish into the `public` git submodule, which is the
 
 ## Publish
 
-```sh
-hugo/hugo
-
-cd public
-git add .
-git commit
-git push origin master
-```
+Use the `./publish.sh` script to publish.
 
 Don't forget to commit the data changes in this repository.
