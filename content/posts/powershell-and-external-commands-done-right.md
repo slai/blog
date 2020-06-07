@@ -4,7 +4,7 @@ lastmod: '2013-12-22'
 date: "2010-06-17"
 ---
 
-Windows PowerShell is a massive step up from the VBScript horror used to manage Windows systems (I have no idea how people wrote websites with it without going mental). One of the things that annoyed me to no end though was how there seemed to be black magic involved when trying to make PowerShell execute external commands, i.e. not PowerShell cmdlets.
+Windows PowerShell is a massive step up from the VBScript horror used to manage Windows systems, but one of the things that annoyed me was how there seemed to be black magic involved when trying to make PowerShell execute external commands, i.e. not PowerShell cmdlets.
 
 It is actually quite straight-forward once you wrap your head around it - it's just that we try to do things the way we did in VBScript or in OO languages, and PowerShell doesn't like that.
 
