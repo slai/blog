@@ -1,4 +1,5 @@
 theme: hyde-hyde
+languageCode: en
 
 baseURL: https://slai.github.io/
 title: Samuel Lai
