@@ -149,3 +149,4 @@ That's it. The repacked custom Ubuntu live ISO can now be found in `./ubuntulive
 
 * I don't use these ISOs for installation, so I haven't tested that part of the functionality after customisation
 * packages that interact with systemd during installation will fail as there is no systemd instance running in the Docker environment. This should only be a problem with non-standard packages; all Ubuntu/Debian packages handle this case properly
+* the kernel image used to boot comes as part of the ISO and will not be updated from within the Dockerfile with this process (e.g. via `apt`). To update the kernel image, download a new Ubuntu live ISO then repeat all the steps, **including** recreating the Docker base image. If the Docker base image is not recreated, it may become out-of-sync with the kernel image version and the ISO will not boot
