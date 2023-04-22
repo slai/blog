@@ -1,6 +1,6 @@
 ---
 title: "Customising Ubuntu live ISOs with Docker"
-lastmod: "2020-06-07"
+lastmod: "2023-04-21"
 date: "2020-06-07"
 ---
 
@@ -77,14 +77,50 @@ RUN rm -rf \
     ~/.bash_history
 ```
 
-Before trying to build your customised image, run the following to exclude the squashfs image and ISO from your build context to save time -
+### Working with systems that use systemd-resolved
+
+Newer Ubuntu versions, e.g. 22.04 LTS, use [systemd-resolved](https://www.freedesktop.org/software/systemd/man/systemd-resolved.service.html). For this to work, it symlinks its own resolv.conf over to `/etc/resolv.conf` to override the default DNS resolution mechanism.
+
+However, Docker also uses the same override strategy to make DNS work within its execution environment. It does this by mounting its override file to `/etc/resolv.conf` as read-only, which unfortunately means there's no way to change it during the build or copy process. As a result, DNS will likely not work in any environment other than the Docker environment.
+
+To work around this, a service needs to be added that restores systemd-resolved's resolv.conf configuration by symlinking it back over to `/etc/resolv.conf`. The following systemd service unit will do this -
+
+```ini
+[Unit]
+Description=Restore systemd-resolved resolv.conf symlink
+# This is needed because Docker bind-mounts /etc/resolv.conf so that file ends
+# up in the image instead of what the systemd-resolved package configures.
+Wants=systemd-resolved.service
+Before=network.target
+
+[Service]
+Type=oneshot
+ExecStart=ln -fsv /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Save the above to a file named `restore-resolvconf-symlink.service` in the same directory as the Dockerfile, then add the following to the Dockerfile to include it into the image -
+
+```dockerfile
+# fix up the /etc/resolv.conf symlink that Docker force bind-mounts
+COPY restore-resolvconf-symlink.service /lib/systemd/system/
+RUN ln -s /lib/systemd/system/restore-resolvconf-symlink.service /etc/systemd/system/multi-user.target.wants
+```
+
+With this, every time the image is started, this service will restore systemd-resolved's resolv.conf to `/etc/resolv.conf`, before the network is configured and used by the system, ensuring all DNS requests will use systemd-resolved.
+
+## Building the customised image
+
+First off, run the following to exclude the squashfs image and ISO from your build context to save time -
 
 ```sh
 echo "**/*.squashfs" >> .dockerignore
 echo "**/*.iso" >> .dockerignore
 ```
 
-Now, to build your customised image, run -
+Then, to build the customised image, run -
 
 ```sh
 sudo docker build -t ubuntulive:image .
