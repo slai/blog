@@ -95,7 +95,7 @@ Before=network.target
 
 [Service]
 Type=oneshot
-ExecStart=ln -fsv /run/systemd/resolve/resolv.conf /etc/resolv.conf
+ExecStart=ln -fsv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 [Install]
 WantedBy=multi-user.target
@@ -105,11 +105,13 @@ Save the above to a file named `restore-resolvconf-symlink.service` in the same 
 
 ```dockerfile
 # fix up the /etc/resolv.conf symlink that Docker force bind-mounts
-COPY restore-resolvconf-symlink.service /lib/systemd/system/
-RUN ln -s /lib/systemd/system/restore-resolvconf-symlink.service /etc/systemd/system/multi-user.target.wants
+COPY restore-resolvconf-symlink.service /etc/systemd/system/
+RUN ln -s /etc/systemd/system/restore-resolvconf-symlink.service /etc/systemd/system/multi-user.target.wants
 ```
 
 With this, every time the image is started, this service will restore systemd-resolved's resolv.conf to `/etc/resolv.conf`, before the network is configured and used by the system, ensuring all DNS requests will use systemd-resolved.
+
+(Specifically, this tells the system to use systemd-resolved's stub resolver which has additional features like per-interface DNS configuration and caching. If this is causing issues, change `/run/systemd/resolve/stub-resolv.conf` to `/run/systemd/resolve/resolv.conf` in the service unit file above to bypass the stub resolver and go straight to the DNS servers configured in systemd-resolved.)
 
 ## Building the customised image
 
