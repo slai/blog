@@ -15,7 +15,7 @@ To start, a Linux distro with [squashfs-tools-ng](https://github.com/AgentD/squa
 [Docker](https://docs.docker.com/engine/install/ubuntu/) is also needed, as are the following packages -
 
 ```sh
-apt-get install p7zip-full grub2-common mtools xorriso squashfs-tools-ng
+apt-get install p7zip-full grub2-common mtools xorriso squashfs-tools-ng jq
 ```
 
 Finally, download a copy of the Ubuntu live ISO to be customised from https://ubuntu.com/download/desktop. (This process will likely also work for other Ubuntu editions like the server edition, but there are often better ways to deploy servers.)
@@ -157,9 +157,21 @@ Now that we have the new squashfs image, it's time to repack the ISO image.
 # create a directory to build the ISO from
 mkdir iso
 
+# this is the path to the Ubuntu live ISO downloaded earlier
+UBUNTU_ISO_PATH=ubuntu_iso_path
+
 # extract the contents of the ISO to the directory, except the original squashfs image
-# UBUNTU_ISO_PATH=path to the Ubuntu live ISO downloaded earlier
 7z x '-xr!filesystem.squashfs' -oiso "$UBUNTU_ISO_PATH"
+
+# extract the EFI binaries from the ISO, they reside in a separate partition
+# this allows the custom ISO to work when Secure Boot is enabled
+EFI_PARTITION_DATA="$(sfdisk --json "$UBUNTU_ISO_PATH" | jq '.partitiontable.partitions | map(select(.type == "C12A7328-F81F-11D2-BA4B-00A0C93EC93B"))[0]')"
+EFI_PARTITION_START="$(echo "$EFI_PARTITION_DATA" | jq '.start')"
+EFI_PARTITION_SIZE="$(echo "$EFI_PARTITION_DATA" | jq '.size')"
+dd bs=512 "count=$EFI_PARTITION_SIZE" "skip=$EFI_PARTITION_START" "if=$UBUNTU_ISO_PATH" of=efi.img
+# grub looks in both the separate partition and /efi.img for the EFI binaries,
+# so writing the partition to /efi.img has the same effect
+cp efi.img iso/
 
 # copy our custom squashfs image and manifest into place
 cp newfilesystem.squashfs iso/casper/filesystem.squashfs
